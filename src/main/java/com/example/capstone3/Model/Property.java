@@ -1,9 +1,6 @@
 package com.example.capstone3.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -22,5 +19,7 @@ public class Property {
     private Integer id;
     @NotEmpty(message = "Can not be empty")
     @Size(min = 3,message = "Can not be less than 3")
+    @Column(columnDefinition = "varchar(30) not null")
     private String title;
+
 }
