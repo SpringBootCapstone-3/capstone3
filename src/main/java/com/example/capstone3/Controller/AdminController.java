@@ -24,7 +24,7 @@ public class AdminController {
         return ResponseEntity.ok(adminService.getAdmin());
     }
 
-    //     Add new Admin
+    //    Add new Admin
     @PostMapping("/add")
     public ResponseEntity<?> addAdmin(@RequestBody @Valid Admin admin) {
         adminService.addAdmin(admin);
