@@ -21,6 +21,7 @@ public class Property {
     @Size(min = 3,message = "Can not be less than 3")
     @Column(columnDefinition = "varchar(30) not null")
     private String title;
+    @NotEmpty
     private String description;
 
 }
