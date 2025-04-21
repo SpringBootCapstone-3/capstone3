@@ -25,4 +25,5 @@ public class Property {
     private String description;
 
 
+
 }
