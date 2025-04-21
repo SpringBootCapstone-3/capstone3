@@ -1,5 +1,4 @@
 package com.example.capstone3.Controller;
 
-public class test {
-    private String mmnk;
+public class PropertyController {
 }
