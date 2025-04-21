@@ -45,4 +45,8 @@ public class Contract {
     @NotEmpty(message = "status must be not empty")
     private String status;
 
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id",referencedColumnName = "id")
+    private Customer customer;
 }

@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -33,4 +35,12 @@ public class Customer {
     @Column(columnDefinition = "varchar(20) not null")
     @NotEmpty(message = "password must be not empty")
     private String password;
+
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")
+    private Set<Contract> contracts;
+
+    @ManyToMany
+    private Set<Bid> bids;
+
 }
