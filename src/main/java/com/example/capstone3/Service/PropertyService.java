@@ -19,6 +19,7 @@ public class PropertyService {
     }
     //ADD
     public void addProperty(Property property){
+        //we can after check the ids
         propertyRepository.save(property);
     }
 
@@ -42,5 +43,11 @@ public class PropertyService {
         }
         propertyRepository.delete(delProperty);
     }
+
+    //Add with
+
+    //Assign
+
+
 
 }
