@@ -24,4 +24,5 @@ public class Property {
     @NotEmpty(message = "hgh")
     private String description;
 
+
 }
