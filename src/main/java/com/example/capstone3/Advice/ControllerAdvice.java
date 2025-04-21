@@ -25,7 +25,6 @@ public class ControllerAdvice {
         String message=e.getMessage();
         return ResponseEntity.status(400).body(new ApiResponse(message));
     }
-
     // Server Validation Exception
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse> MethodArgumentNotValidException(MethodArgumentNotValidException e) {
