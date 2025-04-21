@@ -18,15 +18,13 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 @org.springframework.web.bind.annotation.ControllerAdvice
 public class ControllerAdvice {
-
-
+//test
     // Our Exception
     @ExceptionHandler(value = ApiException.class)
     public ResponseEntity ApiException(ApiException e){
         String message=e.getMessage();
         return ResponseEntity.status(400).body(new ApiResponse(message));
     }
-
     // Server Validation Exception
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse> MethodArgumentNotValidException(MethodArgumentNotValidException e) {
