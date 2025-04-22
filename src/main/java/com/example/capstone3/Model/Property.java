@@ -28,10 +28,6 @@ public class Property {
     private String description;
     private Boolean isApproved = false;
     private Boolean isRented = false;
-//    private Integer owner_id;
-//    private Integer admin_id;
-//    private Integer action_id;
-//    private Integer rental_id;
 
 
 
