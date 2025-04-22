@@ -22,7 +22,5 @@ public class Bid {
     // علاقه مع الكستمر
     // علاقه مع المزاد
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "bid")
-    @PrimaryKeyJoinColumn
-    private Contract contract;
+
 }
