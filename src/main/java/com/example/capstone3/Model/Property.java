@@ -28,27 +28,15 @@ public class Property {
     private String description;
     private Boolean isApproved = false;
     private Boolean isRented = false;
-//    private Integer owner_id;
-//    private Integer admin_id;
-//    private Integer action_id;
-//    private Integer rental_id;
 
 
 
     @ManyToOne
-    @JoinColumn(name = "customer_id" ,referencedColumnName = "id")
+    @JoinColumn(name = "owner_id" ,referencedColumnName = "id")
     @JsonIgnore
     private Owner owner;
-
-
-
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "property")
     @PrimaryKeyJoinColumn
     private Auction auction;
-
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "rental")
-    @PrimaryKeyJoinColumn
-    private Rental rental;
-
 
 }

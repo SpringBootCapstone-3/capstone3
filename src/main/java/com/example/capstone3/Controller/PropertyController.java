@@ -20,9 +20,9 @@ public class PropertyController {
         return ResponseEntity.status(200).body(propertyService.getAllProperty());
     }
     //add
-    @PostMapping("/add/{owner_id}")
-    public ResponseEntity addProperty(@PathVariable Integer owner_id,@RequestBody @Valid Property property){
-        propertyService.addProperty(property,owner_id);
+    @PostMapping("/add/{idOwner}")
+    public ResponseEntity addProperty(@PathVariable Integer idOwner,@RequestBody @Valid Property property){
+        propertyService.addProperty(property,idOwner);
         return ResponseEntity.status(200).body(new ApiResponse("Added"));
     }
 

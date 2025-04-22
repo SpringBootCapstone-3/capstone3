@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -34,7 +36,6 @@ public class Owner {
     @Column(columnDefinition = "varchar(10) not null unique")
     private String phoneNumber;
 
-    // للعلاقات
-    // @OneToMany(mappedBy = "owner")
-    // private Set<Property> properties;
+    @OneToMany(mappedBy = "owner")
+    private Set<Property> properties;
 }

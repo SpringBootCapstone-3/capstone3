@@ -49,7 +49,7 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(Integer id){
-       return customerRepository.findCustomerById(id);
+        return customerRepository.findCustomerById(id);
     }
 
 }

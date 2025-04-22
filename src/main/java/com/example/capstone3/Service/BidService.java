@@ -1,8 +1,12 @@
 package com.example.capstone3.Service;
 
 import com.example.capstone3.Api.ApiException;
+import com.example.capstone3.Model.Auction;
 import com.example.capstone3.Model.Bid;
+import com.example.capstone3.Model.Customer;
+import com.example.capstone3.Repository.AuctionRepository;
 import com.example.capstone3.Repository.BidRepository;
+import com.example.capstone3.Repository.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +16,41 @@ import java.util.List;
 @AllArgsConstructor
 public class BidService {
     private final BidRepository bidRepository;
+    private final CustomerRepository customerRepository;
+    private final AuctionRepository auctionRepository;
     public List<Bid>getBid(){
         return bidRepository.findAll();
     }
+
+    // Relation with auction
     public void addBid(Bid bid){
         bidRepository.save(bid);
     }
+
+
+    //Relation with auction
+    public void addBidWithAuction(Bid bid,Integer idAuction){
+        Auction auction=auctionRepository.findAuctionsById(idAuction);
+        if(auction==null){
+            throw new ApiException("Auction Not Found");
+        }
+        bid.setAuction(auction);
+        bidRepository.save(bid);
+    }
+
+    // Relation with customer
+    public void assignBidToCustomer(Integer idCustomer,Integer idBid){
+        Customer customer=customerRepository.findCustomerById(idCustomer);
+        Bid bid=bidRepository.findBidById(idBid);
+        if(customer==null || bid==null){
+            throw new ApiException("Can't assign");
+        }
+        bid.getCustomers().add(customer);
+        // customer
+        bidRepository.save(bid);
+        customerRepository.save(customer);
+    }
+
     public void updateBid(Integer id,Bid bid){
         Bid bid1=bidRepository.findBidById(id);
         if(bid1==null){
@@ -35,3 +68,4 @@ public class BidService {
         bidRepository.delete(bid);
     }
 }
+// assign Not Add
