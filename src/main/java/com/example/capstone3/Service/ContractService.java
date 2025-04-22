@@ -1,7 +1,10 @@
 package com.example.capstone3.Service;
 
 import com.example.capstone3.Api.ApiException;
+import com.example.capstone3.DTO.ContractDTO;
+import com.example.capstone3.Model.Bid;
 import com.example.capstone3.Model.Contract;
+import com.example.capstone3.Repository.BidRepository;
 import com.example.capstone3.Repository.ContractRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,30 +16,35 @@ import java.util.List;
 public class ContractService {
 
     private final ContractRepository contractRepository;
+    private final BidRepository bidRepository;
 
     public List<Contract> getAllContract(){
         return contractRepository.findAll();
     }
 
 
-    public void addContract(Contract contract){
+    public void addContract(ContractDTO contractDTO){
+        Bid bid=bidRepository.findBidById(contractDTO.getBid_id());
+        if(bid==null){
+            throw new ApiException("bid not found");
+        }
+        Contract contract=new Contract(null, contractDTO.getContractType(),contractDTO.getIssueDate(),contractDTO.getTotalAmount(), contractDTO.getStatus(), contractDTO.getNameOfNewOwner(),bid);
         contractRepository.save(contract);
     }
 
 
-    public void updateContract(Integer id,Contract contract){
-        Contract oldContract=contractRepository.findContractById(id);
-        if(oldContract==null){
+    public void updateContract(ContractDTO contractDTO){
+        Contract contract=contractRepository.findContractById(contractDTO.getBid_id());
+        if(contract==null){
             throw new ApiException("Contract is not found");
         }
-        oldContract.setContractType(contract.getContractType());
-        oldContract.setStatus(contract.getStatus());
-        oldContract.setStartDate(contract.getStartDate());
-        oldContract.setEndDate(contract.getEndDate());
-        oldContract.setIssueDate(contract.getIssueDate());
-        oldContract.setTotalAmount(contract.getTotalAmount());
+        contract.setContractType(contractDTO.getContractType());
+        contract.setStatus(contractDTO.getStatus());
+        contract.setIssueDate(contractDTO.getIssueDate());
+        contract.setTotalAmount(contractDTO.getTotalAmount());
+        contract.setNameOfNewOwner(contractDTO.getNameOfNewOwner());
 
-        contractRepository.save(oldContract);
+        contractRepository.save(contract);
     }
 
 
