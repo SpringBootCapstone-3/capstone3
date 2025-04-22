@@ -1,8 +1,6 @@
 package com.example.capstone3.Controller;
 
 import com.example.capstone3.Api.ApiResponse;
-import com.example.capstone3.Model.Rental;
-import com.example.capstone3.Service.RentalService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

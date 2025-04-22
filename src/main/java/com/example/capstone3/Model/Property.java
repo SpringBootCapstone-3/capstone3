@@ -42,9 +42,7 @@ public class Property {
     @PrimaryKeyJoinColumn
     private Auction auction;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "rental")
-    @PrimaryKeyJoinColumn
-    private Rental rental;
+
 
 
 }

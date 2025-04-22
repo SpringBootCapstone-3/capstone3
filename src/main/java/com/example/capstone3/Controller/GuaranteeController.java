@@ -1,8 +1,6 @@
 package com.example.capstone3.Controller;
 
 import com.example.capstone3.Api.ApiResponse;
-import com.example.capstone3.Model.Guarantee;
-import com.example.capstone3.Service.GuaranteeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
