@@ -25,15 +25,15 @@ public class AuctionService {
     }
 
 
-    public void addAuction(AuctionDTO auctionDTO){
-        Property property=propertyRepository.findPropertyById(auctionDTO.getProperaty_id());
-        if(property==null){
-            throw new ApiException("property");
-        }
-
-        Auction auction=new Auction(null,auctionDTO.getStartTime(),auctionDTO.getEndTime(),auctionDTO.getIsActive(),property);
-        auctionRepository.save(auction);
-    }
+//    public void addAuction(AuctionDTO auctionDTO){
+//        Property property=propertyRepository.findPropertyById(auctionDTO.getProperaty_id());
+//        if(property==null){
+//            throw new ApiException("property");
+//        }
+//
+//        Auction auction=new Auction(null,auctionDTO.getStartTime(),auctionDTO.getEndTime(),auctionDTO.getIsActive(),property);
+//        auctionRepository.save(auction);
+//    }
 
 
     public void updateAuction(AuctionDTO auctionDTO){
