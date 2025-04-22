@@ -47,4 +47,9 @@ public class CustomerService {
         }
         customerRepository.delete(customer);
     }
+
+    public Customer getCustomerById(Integer id){
+       return customerRepository.findCustomerById(id);
+    }
+
 }

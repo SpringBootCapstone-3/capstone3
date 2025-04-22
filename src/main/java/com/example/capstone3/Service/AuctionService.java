@@ -57,4 +57,8 @@ public class AuctionService {
         }
         auctionRepository.delete(auction);
     }
+
+    public Auction getAuctionById(Integer id){
+        return auctionRepository.findAuctionsById(id);
+    }
 }
