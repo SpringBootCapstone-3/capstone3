@@ -1,7 +1,11 @@
 package com.example.capstone3.Service;
 
 import com.example.capstone3.Api.ApiException;
+import com.example.capstone3.Model.Admin;
+import com.example.capstone3.Model.Owner;
 import com.example.capstone3.Model.Property;
+import com.example.capstone3.Repository.AdminRepository;
+import com.example.capstone3.Repository.OwnerRepository;
 import com.example.capstone3.Repository.PropertyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,14 +16,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PropertyService {
     private final PropertyRepository propertyRepository;
+    private final OwnerRepository ownerRepository;
+    private final AdminRepository adminRepository;
+
 
     //GET
     public List<Property> getAllProperty(){
         return propertyRepository.findAll();
     }
     //ADD
-    public void addProperty(Property property){
+    public void addProperty(Property property,Integer owner_id){
         //we can after check the ids
+        Owner owner = ownerRepository.findOwnerById(owner_id);
+
+        if(owner == null){
+            throw new ApiException("Owner not found");
+        }
+
+        property.setOwner(owner);
+
         propertyRepository.save(property);
     }
 

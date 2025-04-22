@@ -1,8 +1,13 @@
 package com.example.capstone3.Service;
 
 import com.example.capstone3.Api.ApiException;
+import com.example.capstone3.DTO.RentalDTO;
+import com.example.capstone3.Model.Customer;
 import com.example.capstone3.Model.Guarantee;
+import com.example.capstone3.Model.Rental;
+import com.example.capstone3.Repository.CustomerRepository;
 import com.example.capstone3.Repository.GuaranteeRepository;
+import com.example.capstone3.Repository.RentalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GuaranteeService {
     private final GuaranteeRepository guaranteeRepository;
+    private final CustomerRepository customerRepository;
+    private final RentalRepository rentalRepository;
 
     //GET
     public List<Guarantee> getAllGuarantees(){
@@ -19,10 +26,15 @@ public class GuaranteeService {
     }
 
     //ADD
-    public void addGuarantee(Guarantee guarantee){
-        //Don't forget to get customer id and rental id please.
-        guaranteeRepository.save(guarantee);
-    }
+//    public void addGuarantee(RentalDTO rentalDTO){
+//        //Don't forget to get customer id and rental id please.
+//      //  Customer customer = customerRepository.findCustomerById(rentalDTO.getCustomer_id());
+//        if(customer == null){
+//            throw new ApiException("not found customer");
+//        }
+        //Guarantee guarantee = new Guarantee(null, rentalDTO.getGuarantee_id(), rentalDTO.getIsActive(), rentalDTO.getCustomer_id(), )
+       // guaranteeRepository.save(guarantee);
+   // }
 
     //update
     public void updateGuarantee(Integer id,Guarantee guarantee){

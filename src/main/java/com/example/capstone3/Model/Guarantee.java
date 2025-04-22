@@ -1,5 +1,6 @@
 package com.example.capstone3.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -23,4 +24,14 @@ public class Guarantee {
     private Integer customer_id;
     @Column(columnDefinition = "int not null")
     private Integer rental_id;
+
+    @ManyToOne
+    @JoinColumn(name = "customer" , referencedColumnName = "id")
+    @JsonIgnore
+    private Customer customer;
+
+    @OneToOne
+    @MapsId
+    @JsonIgnore
+    private Rental rental;
 }
