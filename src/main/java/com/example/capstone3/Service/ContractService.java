@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -150,5 +151,23 @@ public class ContractService {
         // Send the email
         emailService.sendEmail(email, "Your Contract Info", message);
 
+    }
+
+    /// ///////////////////////////
+    //7.endpoint //Archive //Abdullah
+
+    public List<Contract> oldContracts(LocalDate beforeDate){
+        List<Contract> contracts = contractRepository.findAll();
+        List<Contract> oldContract = new ArrayList<>();
+        for (Contract contract : contracts){
+            if (contract.getIssueDate().isBefore(beforeDate)){
+                oldContract.add(contract);
+
+            }
+        }
+        if (oldContract.isEmpty()){
+            throw new ApiException("no contract before");
+        }
+        return oldContract;
     }
 }

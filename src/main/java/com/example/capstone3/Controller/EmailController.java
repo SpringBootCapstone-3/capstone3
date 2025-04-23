@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/email")
 public class EmailController {
 
+
     @Autowired
     private EmailService emailService;
 
     @GetMapping("/send")
-    public ResponseEntity<?> sendTestEmail() {
+    public ResponseEntity<String> sendTestEmail() {
         emailService.sendEmail("receiver_email@example.com", "Test Subject", "Hello from Spring Boot!");
-        return ResponseEntity.ok(new ApiResponse("Email sent successfully!"));
+        return ResponseEntity.ok("Email sent successfully!");
     }
 }

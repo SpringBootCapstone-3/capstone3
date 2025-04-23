@@ -44,6 +44,8 @@ public class Contract {
     @Column(columnDefinition = "varchar(20) not null")
     @NotEmpty(message = "name must be not empty")
     private String nameOfNewOwner;
+
+
     @OneToOne
     @JoinColumn(name = "bid_id")
     @JsonIgnore

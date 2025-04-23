@@ -6,9 +6,13 @@ import com.example.capstone3.Model.Contract;
 import com.example.capstone3.Service.ContractService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/contract")
@@ -63,6 +67,13 @@ public class ContractController {
     public ResponseEntity<String> sendContractInfoToCustomer(@RequestParam String email) {
         contractService.sendContractDetailsToCustomer(email);
         return ResponseEntity.ok("Contract info has been sent to the customer.");
+    }
+
+    //7.
+    @GetMapping("/get-date/{beforeDate}")
+    public ResponseEntity getOldContract(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate beforeDate){
+        List<Contract> contracts = contractService.oldContracts(beforeDate);
+        return ResponseEntity.status(200).body(contracts);
     }
 
 }
