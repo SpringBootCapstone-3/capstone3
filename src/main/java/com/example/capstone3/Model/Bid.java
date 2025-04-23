@@ -27,7 +27,7 @@ public class Bid {
     private Double amount;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date bid_time;
+    private LocalDateTime bid_time;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime expirationDate;

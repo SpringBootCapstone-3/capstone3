@@ -23,7 +23,7 @@ public class BidController {
 
     @PostMapping("/add/{auction_id}")
     public ResponseEntity addBidWithAuction(@PathVariable Integer auction_id, @RequestBody @Valid Bid bid) {
-        bidService.addBidWithAuction(bid, auction_id);
+        bidService.addBidWithAuction(bid,auction_id);
         return ResponseEntity.status(200).body(new ApiResponse("The Bid has been added successfully."));
     }
 

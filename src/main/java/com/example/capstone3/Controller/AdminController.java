@@ -80,5 +80,12 @@ public class AdminController {
         return ResponseEntity.ok(new ApiResponse(adminService.getAuctionStats()));
     }
 
+    //     ( Endpoint 6 of Admin ) send EmailWelcomeToOwner
+    @PostMapping("/owners/send-welcome-emails")
+    public ResponseEntity<?> sendWelcomeEmailsToAllOwners() {
+        ownerService.sendWelcomeEmailsToAllOwners();
+        return ResponseEntity.ok(new ApiResponse("Welcome emails sent to all owners."));
+    }
+
 
 }

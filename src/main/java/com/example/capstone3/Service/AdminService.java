@@ -21,7 +21,6 @@ public class AdminService {
     private final AdminRepository adminRepository;
     private final PropertyRepository propertyRepository;
     private final AuctionRepository auctionRepository;
-    private final EmailService emailService;
 
 
     //    Get all  Admin
@@ -90,24 +89,7 @@ public class AdminService {
         return "Active auctions: " + active + " | Ended auctions: " + ended;
     }
 
-    // ( Endpoint 6 of Admin ) send EmailWelcomeToOwner
-//    public void sendEmailWelcomeToOwner(Owner owner) {
-//        String to = owner.getEmail();
-//        String subject = "Welcome to Our Service!";
-//
-//        String body = "Dear " + owner.getName() + ",\n\n"
-//                + "Welcome to our real estate platform! We’re excited to have you as part of our network of trusted property owners.\n\n"
-//                + "📌 Please note the following important terms of service:\n"
-//                + "1. The platform reserves the right to cancel or void any bid at any time due to legal, technical, or administrative reasons.\n"
-//                + "2. All property listings are subject to approval.\n"
-//                + "3. Violations of platform policies may lead to suspension or deactivation of your account.\n"
-//                + "4. Ensure that all information provided in listings is accurate and up to date.\n\n"
-//                + "By using our platform, you agree to abide by these terms.\n\n"
-//                + "Thank you for joining us!\n"
-//                + "Real Estate Platform Team";
-//
-//        emailService.sendEmail(to, subject, body);
-//    }
+
 
 
 

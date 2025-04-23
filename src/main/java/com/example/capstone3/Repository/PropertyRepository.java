@@ -16,7 +16,6 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
     @Query("select p from Property p where p.owner.id = ?1 and p.auction is not null and p.auction.isActive = true")
     List<Property> findActiveAuctionsByOwnerId(Integer ownerId);
 
-    List<Property> findByOwnerIdAndIsRentedFalse(Integer ownerId);
 
     @Query("select p from Property p where p.title=?1")
     List<Property> findPropertyByTitle(String title);

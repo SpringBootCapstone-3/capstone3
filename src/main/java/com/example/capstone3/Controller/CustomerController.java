@@ -18,25 +18,32 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping("/get")
-    public ResponseEntity getAllCustomer(){
+    public ResponseEntity getAllCustomer() {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.getAllCustomer());
     }
 
     @PostMapping("/add")
-    public ResponseEntity add(@Valid @RequestBody Customer customer){
+    public ResponseEntity add(@Valid @RequestBody Customer customer) {
         customerService.addCustomer(customer);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("customer is added"));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity updateCustomer(@PathVariable Integer id,@Valid @RequestBody Customer customer){
+    public ResponseEntity updateCustomer(@PathVariable Integer id, @Valid @RequestBody Customer customer) {
         customerService.updateCustomer(id, customer);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("customer is updated"));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteCustomer(@PathVariable Integer id){
+    public ResponseEntity deleteCustomer(@PathVariable Integer id) {
         customerService.deleteCustomer(id);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("customer is deleted"));
     }
+
+    @PutMapping("/customers/{id}/withdraw-bid/{bidId}")
+    public ResponseEntity<?> withdrawBid(@PathVariable Integer id, @PathVariable Integer bidId) {
+        customerService.withdrawBid(id, bidId);
+        return ResponseEntity.ok(new ApiResponse("customer is withdrawn!"));
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.capstone3.Controller;
 
+import com.example.capstone3.Api.ApiResponse;
 import com.example.capstone3.Service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,8 @@ public class EmailController {
     private EmailService emailService;
 
     @GetMapping("/send")
-    public ResponseEntity<String> sendTestEmail() {
+    public ResponseEntity<?> sendTestEmail() {
         emailService.sendEmail("receiver_email@example.com", "Test Subject", "Hello from Spring Boot!");
-        return ResponseEntity.ok("Email sent successfully!");
+        return ResponseEntity.ok(new ApiResponse("Email sent successfully!"));
     }
 }

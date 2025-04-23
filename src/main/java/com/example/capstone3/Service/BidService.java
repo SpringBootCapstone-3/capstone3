@@ -8,6 +8,7 @@ import com.example.capstone3.Repository.AuctionRepository;
 import com.example.capstone3.Repository.BidRepository;
 import com.example.capstone3.Repository.CustomerRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -29,12 +30,16 @@ public class BidService {
     }
 
     //Relation with auction
-    public void addBidWithAuction(Bid bid, Integer idAuction) {
-        Auction auction = auctionRepository.findAuctionsById(idAuction);
-        if (auction == null) {
-            throw new ApiException("Auction Not Found");
+    public void addBidWithAuction(Bid bid, Integer auctionId) {
+        Double maxAmount = bidRepository.findMaxBidAmountByAuctionId(auctionId);
+        if (maxAmount != null && bid.getAmount() <= maxAmount) {
+            throw new ApiException("The auction must be higher than previous offers.");
         }
+
+        Auction auction = auctionRepository.findAuctionsById(auctionId);
         bid.setAuction(auction);
+        bid.setStatus("open");
+        bid.setBid_time(LocalDateTime.now());
         bidRepository.save(bid);
     }
 
