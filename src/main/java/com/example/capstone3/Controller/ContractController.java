@@ -42,12 +42,12 @@ public class ContractController {
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Contract is deleted"));
     }
 
-    //1.endpoint Abdullah
-    @PostMapping("/generate/{bidId}")
-    public ResponseEntity generateContract(@PathVariable Integer bidId) {
-        Contract contract = contractService.generateContract(bidId);
-        return ResponseEntity.status(200).body(contract);
-    }
+//    //1.endpoint Abdullah
+//    @PostMapping("/generate/{bidId}")
+//    public ResponseEntity generateContract(@PathVariable Integer bidId) {
+//        Contract contract = contractService.generateContract(bidId);
+//        return ResponseEntity.status(200).body(contract);
+//    }
 
     //2.endpoint Abdullah //Cancel
     @PutMapping("/contract/{contractId}/cancel")

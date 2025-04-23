@@ -65,26 +65,26 @@ public class ContractService {
     }
 
 
-    public Contract generateContract(Integer bidId){
-        Bid bid = bidRepository.findBidById(bidId);
-        if(bid == null){
-            throw new ApiException("bid not found");
-        }
-        Set<Customer> customer = bid.getCustomers();
-        if(customer == null){
-            throw new ApiException("customer not found");
-        }
-        Contract contract= new Contract();
-        contract.setBid(bid);
-        contract.setContractType("SALE");
-        contract.setIssueDate(LocalDate.now());
-        contract.setTotalAmount(bid.getAmount());
-        contract.setStatus("ACTIVE");
-        contract.setNameOfNewOwner(contract.getNameOfNewOwner());
-
-        return contractRepository.save(contract);
-
-    }
+//    public Contract generateContract(Integer bidId){
+//        Bid bid = bidRepository.findBidById(bidId);
+//        if(bid == null){
+//            throw new ApiException("bid not found");
+//        }
+//        Set<Customer> customer = bid.getCustomers();
+//        if(customer == null){
+//            throw new ApiException("customer not found");
+//        }
+//        Contract contract= new Contract();
+//        contract.setBid(bid);
+//        contract.setContractType("SALE");
+//        contract.setIssueDate(LocalDate.now());
+//        contract.setTotalAmount(bid.getAmount());
+//        contract.setStatus("ACTIVE");
+//        contract.setNameOfNewOwner(contract.getNameOfNewOwner());
+//
+//        return contractRepository.save(contract);
+//
+//    }
 
     //2.endpoint Abdullah //Cancel
     public void cancelContract(Integer contractId) {
@@ -116,7 +116,7 @@ public class ContractService {
 
     //3.endpoint //Abdullah update Status
 
-    public Contract updateContractStatus(Integer contractId,String status) {
+    public Contract updateContractStatus(Integer contractId, String status) {
         Contract contract = contractRepository.findContractById(contractId);
         if (contract == null) {
             throw new ApiException("Contract not found");
