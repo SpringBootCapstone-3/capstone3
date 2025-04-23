@@ -35,6 +35,12 @@ public class Auction {
     @NotNull(message = "isActive must not be null")
     private Boolean isActive;
 
+    @Column(columnDefinition = "int not null")
+    private Double startingBid;
+
+    @Column(columnDefinition = "varchar(20) not null")
+    private String status;
+
     @OneToOne
     @JsonIgnore
     @MapsId

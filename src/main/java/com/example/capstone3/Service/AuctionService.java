@@ -31,7 +31,7 @@ public class AuctionService {
             throw new ApiException("property");
         }
 
-        Auction auction=new Auction(null,auctionDTO.getStartTime(),auctionDTO.getEndTime(),auctionDTO.getIsActive(),property,null);
+        Auction auction=new Auction(null,auctionDTO.getStartTime(),auctionDTO.getEndTime(),auctionDTO.getIsActive(),auctionDTO.getStartingBid(),auctionDTO.getStatus(),property,null);
         auctionRepository.save(auction);
     }
 
@@ -60,5 +60,9 @@ public class AuctionService {
 
     public Auction getAuctionById(Integer id){
         return auctionRepository.findAuctionsById(id);
+    }
+
+    public List<Auction> getMostPopularAuctions() {
+        return auctionRepository.findTop2ByOrderByBidsAmountDesc();
     }
 }

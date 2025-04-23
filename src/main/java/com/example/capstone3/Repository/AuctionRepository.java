@@ -22,5 +22,7 @@ public interface AuctionRepository extends JpaRepository<Auction, Integer> {
     @Query("SELECT count(a) FROM Auction a WHERE a.isActive = false")
     int countEndedAuctions();
 
+    List<Auction> findTop2ByOrderByBidsAmountDesc();
+
 
 }
