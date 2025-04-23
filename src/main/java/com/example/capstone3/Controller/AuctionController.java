@@ -39,4 +39,9 @@ public class AuctionController {
         auctionService.deleteAuction(id);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Auction is deleted"));
     }
+
+    @GetMapping("/most-popular")
+    public ResponseEntity getMostPopularAuctions() {
+        return ResponseEntity.status(HttpStatus.OK).body(auctionService.getMostPopularAuctions());
+    }
 }
