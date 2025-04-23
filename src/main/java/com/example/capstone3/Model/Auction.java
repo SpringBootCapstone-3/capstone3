@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +30,7 @@ public class Auction {
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime endTime;
 
-    @Column(columnDefinition = "varchar(20) not null")
-    @NotEmpty(message = "isActive must be not null")
+    @NotNull(message = "isActive must not be null")
     private Boolean isActive;
 
     @OneToOne

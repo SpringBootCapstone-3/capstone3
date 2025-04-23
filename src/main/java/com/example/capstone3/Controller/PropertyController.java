@@ -28,7 +28,7 @@ public class PropertyController {
 
     //update
     @PutMapping("/update/{id}")
-    public ResponseEntity updateProperty(@PathVariable Integer id,@RequestBody @Valid Property property){
+    public ResponseEntity update(@PathVariable Integer id,@RequestBody @Valid Property property){
         propertyService.updateProperty(id, property);
         return ResponseEntity.status(200).body(new ApiResponse("Updated"));
     }

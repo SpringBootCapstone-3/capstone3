@@ -37,8 +37,8 @@ public class Customer {
     private String password;
 
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")
-    private Set<Contract> contracts;
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")
+//    private Set<Contract> contracts;
 
     @ManyToMany
     private Set<Bid> bids;

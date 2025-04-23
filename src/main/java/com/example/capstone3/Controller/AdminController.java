@@ -4,7 +4,9 @@ package com.example.capstone3.Controller;
 import com.example.capstone3.Api.ApiResponse;
 import com.example.capstone3.Model.Admin;
 import com.example.capstone3.Repository.AdminRepository;
+import com.example.capstone3.Repository.OwnerRepository;
 import com.example.capstone3.Service.AdminService;
+import com.example.capstone3.Service.OwnerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private final AdminService adminService;
+    private final OwnerService ownerService;
 
 
     //     Get  Admin
@@ -44,4 +47,38 @@ public class AdminController {
         adminService.deleteAdmin(id);
         return ResponseEntity.ok(new ApiResponse("Deleted Admin!!"));
     }
+
+    // ( Endpoint 1 of Admin )list of properties that have not been approved (isApproved = false)
+    @GetMapping("/unapproved-properties")
+    public ResponseEntity<?> getUnapprovedProperties() {
+        return ResponseEntity.ok(adminService.getUnapprovedProperties());
+    }
+
+    // ( Endpoint 2 of Admin ) Show all active auctions related to this owner's properties.
+    @GetMapping("/admin/active-auctions-without-bids")
+    public ResponseEntity<?> getAuctionsWithoutBids() {
+        return ResponseEntity.ok(adminService.getActiveAuctionsWithoutBids());
+    }
+
+    // ( Endpoint 3 of Admin ) The admin blocked the owner(Blacklist).
+    @PutMapping("/disable-owner/{ownerId}")
+    public ResponseEntity<?> disableOwner(@PathVariable Integer ownerId) {
+        ownerService.disableOwner(ownerId);
+        return ResponseEntity.ok(new ApiResponse("Owner has been disabled(Blacklist) successfully."));
+    }
+
+    // ( Endpoint 4 of Admin ) Admin can end auction early for any reason
+    @PutMapping("/end-auction-early/{auctionId}")
+    public ResponseEntity<?> endAuctionEarly(@PathVariable Integer auctionId) {
+        adminService.endAuctionEarly(auctionId);
+        return ResponseEntity.ok(new ApiResponse("Auction has been ended early by admin."));
+    }
+
+    // ( Endpoint 5 of Admin ) Auction Statistics (Ended/Active)
+    @GetMapping("/admin/auction-stats")
+    public ResponseEntity<?> getAuctionStatsSimple() {
+        return ResponseEntity.ok(new ApiResponse(adminService.getAuctionStats()));
+    }
+
+
 }

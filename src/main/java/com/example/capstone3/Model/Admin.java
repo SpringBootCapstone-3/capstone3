@@ -30,8 +30,6 @@ public class Admin {
     @Column(columnDefinition = "varchar(100) not null")
     private String password;
 
-    // للعلاقات
-//    @OneToMany(mappedBy = "admin")
-//    private List<Property> properties;
+
 
 }

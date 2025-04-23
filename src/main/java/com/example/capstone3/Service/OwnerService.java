@@ -2,6 +2,7 @@ package com.example.capstone3.Service;
 
 import com.example.capstone3.Api.ApiException;
 import com.example.capstone3.Model.Owner;
+import com.example.capstone3.Model.Property;
 import com.example.capstone3.Repository.OwnerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -53,4 +54,17 @@ public class OwnerService {
         }
         ownerRepository.delete(owner);
     }
+
+    // ( Endpoint 3 of Admin ) The admin blocked the owner(Blacklist).
+    public void disableOwner(Integer ownerId) {
+        Owner owner = ownerRepository.findOwnerById(ownerId);
+        if (owner == null) {
+            throw new ApiException("Owner Not Found!!");
+        }
+        owner.setEmail("blocked-" + owner.getName() + ".id." + owner.getId() + "@system.local");
+        ownerRepository.save(owner);
+    }
+
+
+
 }

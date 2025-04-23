@@ -21,15 +21,16 @@ public class PropertyService {
 
 
     //GET
-    public List<Property> getAllProperty(){
+    public List<Property> getAllProperty() {
         return propertyRepository.findAll();
     }
+
     //ADD
-    public void addProperty(Property property,Integer owner_id){
+    public void addProperty(Property property, Integer owner_id) {
         //we can after check the ids
         Owner owner = ownerRepository.findOwnerById(owner_id);
 
-        if(owner == null){
+        if (owner == null) {
             throw new ApiException("Owner not found");
         }
 
@@ -38,10 +39,10 @@ public class PropertyService {
         propertyRepository.save(property);
     }
 
-    //Update
-    public void updateProperty(Integer id,Property property){
+    // Update
+    public void updateProperty(Integer id, Property property) {
         Property oldProperty = propertyRepository.findPropertyById(id);
-        if(oldProperty == null){
+        if (oldProperty == null) {
             throw new ApiException("Property not found");
         }
         oldProperty.setDescription(property.getDescription());
@@ -51,18 +52,39 @@ public class PropertyService {
     }
 
     //DELETE
-    public void deleteProperty(Integer id){
+    public void deleteProperty(Integer id) {
         Property delProperty = propertyRepository.findPropertyById(id);
-        if(delProperty == null){
+        if (delProperty == null) {
             throw new ApiException("Property not found");
         }
         propertyRepository.delete(delProperty);
     }
 
+    // ( Endpoint 1 of Owner ) Show all active auctions related to this owner's properties.
+    public List<Property> getActiveAuctionPropertiesForOwner(Integer ownerId) {
+        return propertyRepository.findActiveAuctionsByOwnerId(ownerId);
+    }
+
+    // ( Endpoint 2 of Owner ) Owner can edit only the property address (IsApproved = false)
+    public void updatePropertyTitle(Integer ownerId, Integer propertyId, String newTitle) {
+        Property property = propertyRepository.findPropertyById(propertyId);
+        if (property == null) {
+            throw new ApiException("Property not found");
+        }
+        if (!property.getOwner().getId().equals(ownerId)) {
+            throw new RuntimeException("Property does not belong to this owner.");
+        }
+        if (property.getIsApproved()) {
+            throw new RuntimeException("Property already approved. You can't change the title.");
+        }
+
+        property.setTitle(newTitle);
+        propertyRepository.save(property);
+    }
+
     //Add with
 
     //Assign
-
 
 
 }
