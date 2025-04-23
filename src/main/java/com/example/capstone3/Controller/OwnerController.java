@@ -56,6 +56,4 @@ public class OwnerController {
         propertyService.updatePropertyTitle(ownerId, propertyId, newTitle);
         return ResponseEntity.ok(new ApiResponse("Property title updated."));
     }
-
-
 }
