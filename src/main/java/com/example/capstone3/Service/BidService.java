@@ -28,10 +28,6 @@ public class BidService {
         return bidRepository.findAll();
     }
 
-    //    // Relation with auction
-//    public void addBid(Bid bid) {
-//        bidRepository.save(bid);
-//    }
     //Relation with auction
     public void addBidWithAuction(Bid bid, Integer idAuction) {
         Auction auction = auctionRepository.findAuctionsById(idAuction);

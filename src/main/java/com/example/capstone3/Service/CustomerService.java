@@ -20,10 +20,6 @@ public class CustomerService {
     }
 
 
-//    public void addCustomer(Customer customer){
-//        customerRepository.save(customer);
-//    }
-
     public void addCustomer(Customer customer){
         customerRepository.save(customer);
         String to = customer.getEmail();
