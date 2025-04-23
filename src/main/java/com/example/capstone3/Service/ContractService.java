@@ -64,28 +64,6 @@ public class ContractService {
         contractRepository.delete(contract);
     }
 
-
-//    public Contract generateContract(Integer bidId){
-//        Bid bid = bidRepository.findBidById(bidId);
-//        if(bid == null){
-//            throw new ApiException("bid not found");
-//        }
-//        Set<Customer> customer = bid.getCustomers();
-//        if(customer == null){
-//            throw new ApiException("customer not found");
-//        }
-//        Contract contract= new Contract();
-//        contract.setBid(bid);
-//        contract.setContractType("SALE");
-//        contract.setIssueDate(LocalDate.now());
-//        contract.setTotalAmount(bid.getAmount());
-//        contract.setStatus("ACTIVE");
-//        contract.setNameOfNewOwner(contract.getNameOfNewOwner());
-//
-//        return contractRepository.save(contract);
-//
-//    }
-
     //2.endpoint Abdullah //Cancel
     public void cancelContract(Integer contractId) {
         Contract contract = contractRepository.findContractById(contractId);

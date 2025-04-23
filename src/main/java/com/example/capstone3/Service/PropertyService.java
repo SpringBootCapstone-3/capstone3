@@ -1,24 +1,23 @@
 package com.example.capstone3.Service;
 
 import com.example.capstone3.Api.ApiException;
-import com.example.capstone3.Model.Admin;
-import com.example.capstone3.Model.Owner;
-import com.example.capstone3.Model.Property;
-import com.example.capstone3.Repository.AdminRepository;
-import com.example.capstone3.Repository.OwnerRepository;
-import com.example.capstone3.Repository.PropertyRepository;
+import com.example.capstone3.Model.*;
+import com.example.capstone3.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class PropertyService {
     private final PropertyRepository propertyRepository;
     private final OwnerRepository ownerRepository;
-    private final AdminRepository adminRepository;
+    private final CustomerRepository customerRepository;
+    private final BidRepository bidRepository;
+    private final AuctionRepository auctionRepository;
 
 
     //GET
@@ -95,5 +94,69 @@ public class PropertyService {
         return filtered;
     }
 
+    //Assign
+    public void cancelProperty(Integer propertyId, Integer ownerId) {
+        Property property = propertyRepository.findPropertyById(propertyId);
+        Owner owner = ownerRepository.findOwnerById(ownerId);
+        if (owner == null) {
+            throw new ApiException("Owner Not Found");
+        }
+        if (property == null) {
+            throw new ApiException("Property Not Found");
+        }
+        propertyRepository.delete(property);
+    }
+
+    // عرض العقار لهذا المالك
+    public Set<Property> getProperties(Integer customerId, Integer ownerId) {
+        Customer customer = customerRepository.findCustomerById(customerId);
+        Owner owner = ownerRepository.findOwnerById(ownerId);
+        if (customer == null) {
+            throw new ApiException("Customer Not Found");
+        }
+        if (owner == null) {
+            throw new ApiException("Owner Not Found");
+        }
+        return owner.getProperties();
+    }
+
+    public void changeApproved(Integer ownerId, Integer propertyId) {
+        Owner owner = ownerRepository.findOwnerById(ownerId);
+        Property property = propertyRepository.findPropertyById(propertyId);
+        if (owner == null) {
+            throw new ApiException("owner Not Found");
+        }
+        if (property == null) {
+            throw new ApiException("Property Not Found");
+        }
+        property.setIsApproved(true);
+        propertyRepository.save(property);
+    }
+
+    public Auction checkAuctionOfProperty(Integer propertyId) {
+        Property property = propertyRepository.findPropertyById(propertyId);
+        Auction auction = auctionRepository.findAuctionsById(property.getAuction().getId());
+        if (property == null) {
+            throw new ApiException("Property Not Found");
+        }
+        if (auction == null) {
+            throw new ApiException("auction Not Found");
+        }
+        return auction;
+    }
+
+    public List<Property> classificationProperty(String title) {
+        List<Property> properties = propertyRepository.findPropertyByTitle(title);
+        List<Property> propertyList = new ArrayList<>();
+        if (title == null) {
+            throw new ApiException("title Not Found");
+        }
+        for (Property p : properties) {
+            if (p.getTitle().equalsIgnoreCase(title)) {
+                propertyList.add(p);
+            }
+        }
+        return propertyList;
+    }
 
 }

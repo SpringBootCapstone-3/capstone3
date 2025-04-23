@@ -38,7 +38,7 @@ public class PropertyController {
 
     //delete
     @DeleteMapping("/del/{id}")
-    public ResponseEntity delProperty(@PathVariable Integer id) {
+    public ResponseEntity deleteProperty(@PathVariable Integer id) {
         propertyService.deleteProperty(id);
         return ResponseEntity.status(200).body(new ApiResponse("Deleted"));
     }
@@ -51,4 +51,33 @@ public class PropertyController {
         List<Property> properties = propertyService.getPropertyByPriceRange(min, max);
         return ResponseEntity.ok(properties);
     }
+
+    @GetMapping("/getPro/{customerId}/{ownerId}")
+    public ResponseEntity getProperties(@PathVariable Integer customerId, @PathVariable Integer ownerId) {
+        return ResponseEntity.status(200).body(propertyService.getProperties(customerId, ownerId));
+    }
+
+    @PutMapping("/change/{ownerid}/{propertyId}")
+    public ResponseEntity changeApproved(@PathVariable Integer ownerid, @PathVariable Integer propertyId) {
+        propertyService.changeApproved(ownerid, propertyId);
+        return ResponseEntity.status(200).body(new ApiResponse("Successfully"));
+    }
+
+    @DeleteMapping("/canselProperty/{propertyId}/{ownerId}")
+    public ResponseEntity canselProperty(@PathVariable Integer propertyId, @PathVariable Integer ownerId) {
+        propertyService.cancelProperty(propertyId, ownerId);
+        return ResponseEntity.status(200).body(new ApiResponse("Deleted"));
+    }
+
+    @GetMapping("gitAuctionOfProperty/{propertyId}")
+    public ResponseEntity checkAuctionOfProperty(@PathVariable Integer propertyId) {
+        return ResponseEntity.status(200).body(propertyService.checkAuctionOfProperty(propertyId));
+    }
+
+    @GetMapping("/class")
+    public ResponseEntity classificationProperty(@RequestBody @Valid String title) {
+        return ResponseEntity.status(200).body(propertyService.classificationProperty(title));
+    }
+
+
 }
