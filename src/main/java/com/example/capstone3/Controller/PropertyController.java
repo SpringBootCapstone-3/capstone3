@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/property")
 @RequiredArgsConstructor
@@ -16,26 +18,37 @@ public class PropertyController {
 
     //GET
     @GetMapping("/get")
-    public ResponseEntity getAllProperty(){
+    public ResponseEntity getAllProperty() {
         return ResponseEntity.status(200).body(propertyService.getAllProperty());
     }
+
     //add
     @PostMapping("/add/{idOwner}")
-    public ResponseEntity addProperty(@PathVariable Integer idOwner,@RequestBody @Valid Property property){
-        propertyService.addProperty(property,idOwner);
+    public ResponseEntity addProperty(@PathVariable Integer idOwner, @RequestBody @Valid Property property) {
+        propertyService.addProperty(property, idOwner);
         return ResponseEntity.status(200).body(new ApiResponse("Added"));
     }
 
     //update
     @PutMapping("/update/{id}")
-    public ResponseEntity update(@PathVariable Integer id,@RequestBody @Valid Property property){
+    public ResponseEntity update(@PathVariable Integer id, @RequestBody @Valid Property property) {
         propertyService.updateProperty(id, property);
         return ResponseEntity.status(200).body(new ApiResponse("Updated"));
     }
+
     //delete
     @DeleteMapping("/del/{id}")
-    public ResponseEntity delProperty(@PathVariable Integer id){
+    public ResponseEntity delProperty(@PathVariable Integer id) {
         propertyService.deleteProperty(id);
         return ResponseEntity.status(200).body(new ApiResponse("Deleted"));
+    }
+
+    @GetMapping("/filter-by-price/{min}/{max}")
+    public ResponseEntity<List<Property>> filterPropertiesByPrice(
+            @PathVariable Double min,
+            @PathVariable Double max) {
+
+        List<Property> properties = propertyService.getPropertyByPriceRange(min, max);
+        return ResponseEntity.ok(properties);
     }
 }

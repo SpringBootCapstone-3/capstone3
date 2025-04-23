@@ -29,7 +29,7 @@ public class Contract {
     @Column(columnDefinition = "varchar(20) not null")
     private String contractType;
 
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDate issueDate;
 
 
@@ -44,11 +44,12 @@ public class Contract {
     @Column(columnDefinition = "varchar(20) not null")
     @NotEmpty(message = "name must be not empty")
     private String nameOfNewOwner;
-
-
-
     @OneToOne
-    @MapsId
+    @JoinColumn(name = "bid_id")
     @JsonIgnore
     private Bid bid;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id" , nullable = false)
+    private Customer customer;
 }

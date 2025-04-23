@@ -1,5 +1,7 @@
+
 package com.example.capstone3.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -36,11 +38,10 @@ public class Customer {
     @NotEmpty(message = "password must be not empty")
     private String password;
 
-
-//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")
-//    private Set<Contract> contracts;
-
     @ManyToMany
     private Set<Bid> bids;
 
+    @OneToMany(mappedBy = "customer")
+    @JsonIgnore
+    private Set<Contract> contracts;
 }

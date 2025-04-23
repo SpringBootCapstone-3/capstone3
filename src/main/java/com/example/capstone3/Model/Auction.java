@@ -1,5 +1,7 @@
 package com.example.capstone3.Model;
 
+import com.example.capstone3.Model.Bid;
+import com.example.capstone3.Model.Property;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -38,6 +40,6 @@ public class Auction {
     @MapsId
     private Property property;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "auction")
-    private Set<Bid>bids;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "auction")
+    private Set<Bid> bids;
 }

@@ -1,5 +1,6 @@
 package com.example.capstone3.Model;
 
+import com.example.capstone3.DTO.AuctionDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -23,12 +24,14 @@ public class Bid {
     private Date bid_time;
     // علاقه مع الكستمر
     @ManyToMany(mappedBy = "bids")
+    @JsonIgnore
     private Set<Customer> customers;
     // علاقه مع المزاد
     @ManyToOne
     @JoinColumn(name = "auction_id")
     @JsonIgnore
     private Auction auction;
+
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "bid")
     @PrimaryKeyJoinColumn
     private Contract contract;

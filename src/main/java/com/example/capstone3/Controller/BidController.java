@@ -50,4 +50,5 @@ public class BidController {
         return ResponseEntity.status(200).body(new ApiResponse("The Bid has been deleted successfully."));
     }
 
+
 }

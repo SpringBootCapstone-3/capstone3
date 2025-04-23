@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class ContractDTO {
 
     private Integer bid_id;
-
+    private Integer customer_id;
     @NotEmpty(message = "contract can not be empty")
     private String contractType;
 
@@ -34,6 +34,7 @@ public class ContractDTO {
 
     @NotEmpty(message = "name must be not empty")
     private String nameOfNewOwner;
+
 
 
 }

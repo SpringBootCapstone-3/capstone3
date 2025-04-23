@@ -9,4 +9,7 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
 
 
     Customer findCustomerById(Integer id);
+
+    // Abdullah Ali1
+    Customer findCustomerByEmail(String email);
 }
