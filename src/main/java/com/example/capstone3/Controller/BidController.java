@@ -69,5 +69,22 @@ public class BidController {
         return ResponseEntity.status(200).body(new ApiResponse("Participates in the Bid."));
     }
 
+    @GetMapping("/loss/{auctionId}/{customerId}")
+    public ResponseEntity LossBid(@PathVariable Integer auctionId, @PathVariable Integer customerId){
+        bidService.LossBid(customerId,auctionId);
+        return ResponseEntity.status(200).body(new ApiResponse("The auction has been closed. Good luck to you."));
 
+    }
+
+
+    @GetMapping("/customer/{customerId}")
+    public ResponseEntity getBidsByCustomer(@PathVariable Integer customerId) {
+        return ResponseEntity.status(200).body(bidService.getBidsByCustomerId(customerId));
+    }
+
+
+    @GetMapping("/highest")
+    public ResponseEntity getHighestBidAmount() {
+        return ResponseEntity.status(200).body(bidService.getHighestBidAmount());
+    }
 }

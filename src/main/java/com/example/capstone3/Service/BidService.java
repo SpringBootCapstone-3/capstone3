@@ -157,5 +157,40 @@ public class BidService {
         }
     }
 
+    public void LossBid(Integer customerId, Integer auctionId) {
+        List<Bid> bids = bidRepository.findAll();
+        Customer customer = customerRepository.findCustomerById(customerId);
+        Double AmountMax = bidRepository.findMaxBidAmountByAuctionId(auctionId);
+        for (Bid bid : bids) {
+            if (bid.getAuction().getId().equals(auctionId)) {
+                if (!bid.getAmount().equals(AmountMax) && bid.getStatus().equals("closed")) {
+                    String to = customer.getEmail();
+                    String subject = "Contract Cancellation Notice";
+                    String body = "Dear " + customer.getName() + ",\n\nThe auction has been closed. We wish you better luck next time." + customer.getId() + ".\n\nRegards,\nReal Estate Team";
+                    emailService.sendEmail(to, subject, body);
+                }
+            }
+
+        }
+    }
+
+    public List<Bid> getBidsByCustomerId(Integer customerId) {
+        List<Bid> bids = bidRepository.findBidsByCustomerId(customerId);
+        if (bids.isEmpty()) {
+            throw new ApiException("No bids found for this customer.");
+        }
+        return bids;
+    }
+
+
+    //khalid almutiri اعلى مزايده
+    public Double getHighestBidAmount() {
+        Double highest = bidRepository.findHighestBidAmount();
+        if (highest == null) {
+            throw new ApiException("No bids available in the system.");
+        }
+        return highest;
+    }
+
 
 }
