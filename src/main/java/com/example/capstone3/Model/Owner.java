@@ -1,5 +1,6 @@
 package com.example.capstone3.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,14 @@ public class Owner {
     @Column(columnDefinition = "varchar(10) not null unique")
     private String phoneNumber;
 
+    @NotEmpty(message = "Password must not be empty")
+    @Size(min = 6, message = "Password must be at least 6 characters")
+    @Column(columnDefinition = "varchar(100) not null")
+    private String password;
+
     @OneToMany(mappedBy = "owner")
     private Set<Property> properties;
+
+    private Boolean isBanned = false;
+
 }

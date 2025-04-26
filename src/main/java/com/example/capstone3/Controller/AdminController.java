@@ -64,8 +64,9 @@ public class AdminController {
     @PutMapping("/disable-owner/{ownerId}")
     public ResponseEntity<?> disableOwner(@PathVariable Integer ownerId) {
         ownerService.disableOwner(ownerId);
-        return ResponseEntity.ok(new ApiResponse("Owner has been disabled(Blacklist) successfully."));
+        return ResponseEntity.ok(new ApiResponse("Owner has been disabled (Blacklist) successfully."));
     }
+
 
     // ( Endpoint 4 of Admin ) Admin can end auction early for any reason
     @PutMapping("/end-auction-early/{auctionId}")
@@ -85,6 +86,14 @@ public class AdminController {
     public ResponseEntity<?> sendWelcomeEmailsToAllOwners() {
         ownerService.sendWelcomeEmailsToAllOwners();
         return ResponseEntity.ok(new ApiResponse("Welcome emails sent to all owners."));
+    }
+
+
+    // ( Endpoint 7 of Admin ) The admin unblocked the owner (Remove from Blacklist).
+    @PutMapping("/enable-owner/{ownerId}")
+    public ResponseEntity<?> enableOwner(@PathVariable Integer ownerId) {
+        ownerService.enableOwner(ownerId);
+        return ResponseEntity.ok(new ApiResponse("Owner has been enabled."));
     }
 
 

@@ -26,8 +26,8 @@ public class OwnerService {
     }
 
     //     Update Admin
-    public void updateOwner(Owner owner) {
-        Owner oldOwner = ownerRepository.findOwnerById(owner.getId());
+    public void updateOwner(Owner owner, Integer id) {
+        Owner oldOwner = ownerRepository.findOwnerById(id);
         Owner ownerByEmail = ownerRepository.findOwnerByEmail(owner.getEmail());
         Owner ownerByPhone = ownerRepository.findOwnerByPhoneNumber(owner.getPhoneNumber());
 
@@ -62,7 +62,8 @@ public class OwnerService {
         if (owner == null) {
             throw new ApiException("Owner Not Found!!");
         }
-        owner.setEmail("blocked-" + owner.getName() + ".id." + owner.getId() + "@system.local");
+
+        owner.setIsBanned(true);
         ownerRepository.save(owner);
     }
 
@@ -92,6 +93,17 @@ public class OwnerService {
         emailService.sendEmail(to, subject, body);
     }
 
+
+    // ( Endpoint 7 of Admin ) The admin unblocked the owner (Remove from Blacklist).
+    public void enableOwner(Integer ownerId) {
+        Owner owner = ownerRepository.findOwnerById(ownerId);
+        if (owner == null) {
+            throw new ApiException("Owner Not Found!!");
+        }
+
+        owner.setIsBanned(false);
+        ownerRepository.save(owner);
+    }
 
 
 }

@@ -31,9 +31,9 @@ public class OwnerController {
     }
 
     // Update Owner
-    @PutMapping("/update")
-    public ResponseEntity<?> updateOwner(@RequestBody @Valid Owner owner) {
-        ownerService.updateOwner(owner);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateOwner(@RequestBody @Valid Owner owner ,@PathVariable Integer id) {
+        ownerService.updateOwner(owner ,id);
         return ResponseEntity.ok(new ApiResponse("Updated Owner!!"));
     }
 

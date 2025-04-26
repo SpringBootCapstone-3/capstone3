@@ -34,8 +34,11 @@ public class PropertyService {
             throw new ApiException("Owner not found");
         }
 
-        property.setOwner(owner);
+        if (owner.getIsBanned()) {
+            throw new ApiException("Banned owners are not allowed to add properties");
+        }
 
+        property.setOwner(owner);
         propertyRepository.save(property);
     }
 
